@@ -1,39 +1,162 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>My Store</title>
+    <title>Kylian's Store</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: #f2f2f2;
-            padding: 40px;
+            background: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background: #cc0000;
+            padding: 20px;
+            text-align: center;
+            color: white;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        #searchBar {
+            width: 80%;
+            max-width: 500px;
+            padding: 12px;
+            margin: 20px auto;
+            display: block;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 18px;
+        }
+
+        #categoryBar {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .categoryBtn {
+            padding: 10px 20px;
+            margin: 5px;
+            background: #cc0000;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .categoryBtn:hover {
+            background: #a80000;
+        }
+
+        #productGrid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            width: 90%;
+            margin: auto;
+        }
+
+        .productCard {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.15);
             text-align: center;
         }
-        .box {
-            background: white;
-            padding: 30px;
+
+        .productCard img {
+            width: 100%;
             border-radius: 10px;
-            width: 400px;
-            margin: auto;
-            box-shadow: 0 0 10px rgba(0,0,0,0.2);
         }
-        h1 {
-            color: #333;
-        }
-        p {
+
+        .productName {
             font-size: 18px;
-            color: #555;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+
+        .productPrice {
+            color: #cc0000;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .buyBtn {
+            background: #cc0000;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .buyBtn:hover {
+            background: #a80000;
         }
     </style>
 </head>
 <body>
 
-    <div class="box">
-        <h1>Store is Working!</h1>
-        <p>If you see this message, GitHub Pages is working correctly.</p>
-        <p>Now we can paste your full store code.</p>
-    </div>
+<header>Kylian's Store</header>
+
+<input type="text" id="searchBar" placeholder="Search products...">
+
+<div id="categoryBar">
+    <button class="categoryBtn" onclick="filterCategory('all')">All</button>
+    <button class="categoryBtn" onclick="filterCategory('electronics')">Electronics</button>
+    <button class="categoryBtn" onclick="filterCategory('clothing')">Clothing</button>
+    <button class="categoryBtn" onclick="filterCategory('sports')">Sports</button>
+</div>
+
+<div id="productGrid"></div>
+
+<script>
+    const products = [
+        {name: "Wireless Headphones", price: "$49.99", category: "electronics", img: "https://via.placeholder.com/220"},
+        {name: "Smartwatch", price: "$89.99", category: "electronics", img: "https://via.placeholder.com/220"},
+        {name: "Red Hoodie", price: "$29.99", category: "clothing", img: "https://via.placeholder.com/220"},
+        {name: "Running Shoes", price: "$59.99", category: "sports", img: "https://via.placeholder.com/220"},
+        {name: "Soccer Ball", price: "$19.99", category: "sports", img: "https://via.placeholder.com/220"},
+        {name: "Graphic T-Shirt", price: "$14.99", category: "clothing", img: "https://via.placeholder.com/220"}
+    ];
+
+    const grid = document.getElementById("productGrid");
+    const searchBar = document.getElementById("searchBar");
+
+    function displayProducts(list) {
+        grid.innerHTML = "";
+        list.forEach(p => {
+            grid.innerHTML += `
+                <div class="productCard">
+                    <img src="${p.img}">
+                    <div class="productName">${p.name}</div>
+                    <div class="productPrice">${p.price}</div>
+                    <button class="buyBtn">Buy</button>
+                </div>
+            `;
+        });
+    }
+
+    function filterCategory(cat) {
+        if (cat === "all") {
+            displayProducts(products);
+        } else {
+            displayProducts(products.filter(p => p.category === cat));
+        }
+    }
+
+    searchBar.addEventListener("input", () => {
+        const text = searchBar.value.toLowerCase();
+        displayProducts(products.filter(p => p.name.toLowerCase().includes(text)));
+    });
+
+    displayProducts(products);
+</script>
 
 </body>
 </html>
