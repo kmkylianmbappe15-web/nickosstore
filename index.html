@@ -6,11 +6,11 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: #f5f5f5;
+            background: #e6e6e6;
             margin: 0;
         }
         header {
-            background: #cc0000;
+            background: #2ecc71;
             padding: 20px;
             text-align: center;
             color: white;
@@ -23,7 +23,7 @@
             justify-content: center;
             gap: 10px;
             padding: 15px;
-            background: #ffffff;
+            background: #f0f0f0;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         #searchBar {
@@ -35,7 +35,7 @@
         }
         .categoryBtn {
             padding: 8px 14px;
-            background: #cc0000;
+            background: #2ecc71;
             color: white;
             border: none;
             border-radius: 6px;
@@ -43,10 +43,10 @@
             font-size: 14px;
         }
         .categoryBtn.active {
-            background: #333;
+            background: #27ae60;
         }
         .categoryBtn:hover {
-            background: #a80000;
+            background: #27ae60;
         }
         #productGrid {
             display: grid;
@@ -57,7 +57,7 @@
             margin: auto;
         }
         .productCard {
-            background: white;
+            background: #f7f7f7;
             padding: 12px;
             border-radius: 10px;
             box-shadow: 0 0 8px rgba(0,0,0,0.12);
@@ -93,12 +93,12 @@
             align-items: center;
         }
         .productPrice {
-            color: #cc0000;
+            color: #2ecc71;
             font-size: 18px;
             font-weight: bold;
         }
         .buyBtn {
-            background: #cc0000;
+            background: #2ecc71;
             color: white;
             padding: 8px 12px;
             border: none;
@@ -107,7 +107,7 @@
             font-size: 14px;
         }
         .buyBtn:hover {
-            background: #a80000;
+            background: #27ae60;
         }
         #countBar {
             text-align: center;
@@ -139,81 +139,47 @@
 <div id="productGrid"></div>
 
 <script>
-    // Base product list – you can duplicate/extend this to hundreds or thousands
+    // Base product list – stable images
     const baseProducts = [
         // ELECTRONICS
-        {name: "Wireless Headphones", price: 49.99, category: "electronics", img: "https://picsum.photos/260?random=101", desc: "Bluetooth over-ear headphones with noise isolation."},
-        {name: "Smartwatch Series X", price: 129.99, category: "electronics", img: "https://picsum.photos/260?random=102", desc: "Fitness tracking, notifications, and heart rate monitor."},
-        {name: "4K Smart TV 55\"", price: 399.99, category: "electronics", img: "https://picsum.photos/260?random=103", desc: "Ultra HD smart TV with streaming apps built-in."},
-        {name: "Gaming Laptop 15\"", price: 899.99, category: "electronics", img: "https://picsum.photos/260?random=104", desc: "High-performance laptop for gaming and school."},
-        {name: "Bluetooth Speaker", price: 39.99, category: "electronics", img: "https://picsum.photos/260?random=105", desc: "Portable speaker with deep bass and long battery."},
+        {name: "Wireless Headphones", price: 49.99, category: "electronics", img: "https://placehold.co/260x260?text=Headphones", desc: "Bluetooth over-ear headphones with noise isolation."},
+        {name: "Smartwatch Series X", price: 129.99, category: "electronics", img: "https://placehold.co/260x260?text=Smartwatch", desc: "Fitness tracking, notifications, and heart rate monitor."},
+        {name: "4K Smart TV 55\"", price: 399.99, category: "electronics", img: "https://placehold.co/260x260?text=4K+TV", desc: "Ultra HD smart TV with streaming apps built-in."},
 
         // CLOTHING
-        {name: "Red Hoodie", price: 29.99, category: "clothing", img: "https://picsum.photos/260?random=201", desc: "Soft fleece hoodie, perfect for everyday wear."},
-        {name: "Graphic T-Shirt", price: 14.99, category: "clothing", img: "https://picsum.photos/260?random=202", desc: "Cotton tee with bold front print."},
-        {name: "Black Joggers", price: 24.99, category: "clothing", img: "https://picsum.photos/260?random=203", desc: "Slim-fit joggers with elastic waist."},
-        {name: "Denim Jacket", price: 49.99, category: "clothing", img: "https://picsum.photos/260?random=204", desc: "Classic denim jacket with pockets."},
-        {name: "Running Shorts", price: 19.99, category: "clothing", img: "https://picsum.photos/260?random=205", desc: "Lightweight shorts for sports and training."},
+        {name: "Red Hoodie", price: 29.99, category: "clothing", img: "https://placehold.co/260x260?text=Hoodie", desc: "Soft fleece hoodie, perfect for everyday wear."},
+        {name: "Graphic T-Shirt", price: 14.99, category: "clothing", img: "https://placehold.co/260x260?text=T-Shirt", desc: "Cotton tee with bold front print."},
 
         // HOME
-        {name: "Memory Foam Pillow", price: 19.99, category: "home", img: "https://picsum.photos/260?random=301", desc: "Comfortable pillow for better sleep."},
-        {name: "Cozy Throw Blanket", price: 24.99, category: "home", img: "https://picsum.photos/260?random=302", desc: "Soft blanket for couch or bed."},
-        {name: "LED Floor Lamp", price: 34.99, category: "home", img: "https://picsum.photos/260?random=303", desc: "Modern lamp with adjustable brightness."},
-        {name: "Kitchen Knife Set", price: 39.99, category: "home", img: "https://picsum.photos/260?random=304", desc: "Stainless steel knives with block."},
-        {name: "Nonstick Pan Set", price: 44.99, category: "home", img: "https://picsum.photos/260?random=305", desc: "Durable nonstick pans for everyday cooking."},
+        {name: "Memory Foam Pillow", price: 19.99, category: "home", img: "https://placehold.co/260x260?text=Pillow", desc: "Comfortable pillow for better sleep."},
 
         // TOYS
-        {name: "Building Block Set", price: 29.99, category: "toys", img: "https://picsum.photos/260?random=401", desc: "Creative building blocks for kids."},
-        {name: "Remote Control Car", price: 34.99, category: "toys", img: "https://picsum.photos/260?random=402", desc: "Fast RC car with rechargeable battery."},
-        {name: "Plush Teddy Bear", price: 14.99, category: "toys", img: "https://picsum.photos/260?random=403", desc: "Soft plush bear for all ages."},
-        {name: "Puzzle Pack 1000 pcs", price: 19.99, category: "toys", img: "https://picsum.photos/260?random=404", desc: "Challenging puzzle set for family time."},
-        {name: "Action Figure Set", price: 24.99, category: "toys", img: "https://picsum.photos/260?random=405", desc: "Collectible action figures with accessories."},
+        {name: "Remote Control Car", price: 34.99, category: "toys", img: "https://placehold.co/260x260?text=RC+Car", desc: "Fast RC car with rechargeable battery."},
 
         // SPORTS
-        {name: "Soccer Ball Pro", price: 24.99, category: "sports", img: "https://picsum.photos/260?random=501", desc: "Match-quality soccer ball for training."},
-        {name: "Running Shoes", price: 59.99, category: "sports", img: "https://picsum.photos/260?random=502", desc: "Lightweight shoes with cushioned sole."},
-        {name: "Basketball", price: 19.99, category: "sports", img: "https://picsum.photos/260?random=503", desc: "Indoor/outdoor basketball with grip."},
-        {name: "Yoga Mat", price: 17.99, category: "sports", img: "https://picsum.photos/260?random=504", desc: "Non-slip mat for stretching and yoga."},
-        {name: "Water Bottle 32oz", price: 12.99, category: "sports", img: "https://picsum.photos/260?random=505", desc: "Reusable bottle for gym and school."},
+        {name: "Soccer Ball Pro", price: 24.99, category: "sports", img: "https://placehold.co/260x260?text=Soccer+Ball", desc: "Match-quality soccer ball for training."},
 
         // BEAUTY
-        {name: "Face Cleanser", price: 9.99, category: "beauty", img: "https://picsum.photos/260?random=601", desc: "Gentle cleanser for daily use."},
-        {name: "Moisturizing Lotion", price: 12.99, category: "beauty", img: "https://picsum.photos/260?random=602", desc: "Hydrating lotion for dry skin."},
-        {name: "Shampoo & Conditioner Set", price: 14.99, category: "beauty", img: "https://picsum.photos/260?random=603", desc: "Hair care combo for smooth hair."},
-        {name: "Body Wash", price: 7.99, category: "beauty", img: "https://picsum.photos/260?random=604", desc: "Refreshing scented body wash."},
-        {name: "Lip Balm Pack", price: 5.99, category: "beauty", img: "https://picsum.photos/260?random=605", desc: "Multi-flavor lip balm set."},
+        {name: "Face Cleanser", price: 9.99, category: "beauty", img: "https://placehold.co/260x260?text=Cleanser", desc: "Gentle cleanser for daily use."},
 
         // GROCERY
-        {name: "Cereal Family Pack", price: 4.99, category: "grocery", img: "https://picsum.photos/260?random=701", desc: "Crunchy cereal for breakfast."},
-        {name: "Pasta Box", price: 1.99, category: "grocery", img: "https://picsum.photos/260?random=702", desc: "Durum wheat pasta for dinner."},
-        {name: "Tomato Sauce Jar", price: 2.49, category: "grocery", img: "https://picsum.photos/260?random=703", desc: "Rich tomato sauce for pasta."},
-        {name: "Snack Chips Bag", price: 3.49, category: "grocery", img: "https://picsum.photos/260?random=704", desc: "Crunchy chips for snacking."},
-        {name: "Juice Bottle", price: 3.99, category: "grocery", img: "https://picsum.photos/260?random=705", desc: "Fruit juice with vitamin C."},
+        {name: "Cereal Family Pack", price: 4.99, category: "grocery", img: "https://placehold.co/260x260?text=Cereal", desc: "Crunchy cereal for breakfast."},
 
         // BABY
-        {name: "Baby Diapers Pack", price: 19.99, category: "baby", img: "https://picsum.photos/260?random=801", desc: "Soft and absorbent diapers."},
-        {name: "Baby Wipes", price: 4.99, category: "baby", img: "https://picsum.photos/260?random=802", desc: "Gentle wipes for sensitive skin."},
-        {name: "Baby Onesie Set", price: 24.99, category: "baby", img: "https://picsum.photos/260?random=803", desc: "Cute printed onesies."},
-        {name: "Baby Bottle 3-pack", price: 14.99, category: "baby", img: "https://picsum.photos/260?random=804", desc: "Anti-colic bottles for feeding."},
-        {name: "Baby Blanket", price: 17.99, category: "baby", img: "https://picsum.photos/260?random=805", desc: "Soft blanket for crib or stroller."},
+        {name: "Baby Diapers Pack", price: 19.99, category: "baby", img: "https://placehold.co/260x260?text=Diapers", desc: "Soft and absorbent diapers."},
 
         // PETS
-        {name: "Dog Food Bag", price: 29.99, category: "pets", img: "https://picsum.photos/260?random=901", desc: "Balanced nutrition for adult dogs."},
-        {name: "Cat Litter", price: 12.99, category: "pets", img: "https://picsum.photos/260?random=902", desc: "Clumping litter for odor control."},
-        {name: "Pet Toy Pack", price: 9.99, category: "pets", img: "https://picsum.photos/260?random=903", desc: "Fun toys for dogs and cats."},
-        {name: "Pet Bed Medium", price: 34.99, category: "pets", img: "https://picsum.photos/260?random=904", desc: "Cozy bed for pets."},
-        {name: "Pet Treats Box", price: 7.99, category: "pets", img: "https://picsum.photos/260?random=905", desc: "Crunchy treats for training."}
+        {name: "Dog Food Bag", price: 29.99, category: "pets", img: "https://placehold.co/260x260?text=Dog+Food", desc: "Balanced nutrition for adult dogs."}
     ];
 
-    // Expand to "mega" by duplicating patterns
+    // Expand to mega store
     const products = [];
-    const repeats = 10; // 10 * ~50 base products ≈ 500 items; increase to 50 for 2500+
+    const repeats = 50; // 50 × base products ≈ 2500 items
     for (let i = 0; i < repeats; i++) {
-        baseProducts.forEach((p, idx) => {
+        baseProducts.forEach((p) => {
             products.push({
                 ...p,
-                name: p.name + " #" + (i + 1),
-                img: p.img + "&set=" + i
+                name: p.name + " #" + (i + 1)
             });
         });
     }
