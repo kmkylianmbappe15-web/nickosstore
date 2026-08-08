@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Mega Target by Kylian</title>
+    <title>NICKO'S Online</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -119,7 +119,7 @@
 </head>
 <body>
 
-<header>Mega Target by Kylian</header>
+<header>NICKO'S Online</header>
 
 <div id="topBar">
     <input type="text" id="searchBar" placeholder="Search products...">
@@ -139,42 +139,23 @@
 <div id="productGrid"></div>
 
 <script>
-    // Base product list – stable images
     const baseProducts = [
-        // ELECTRONICS
         {name: "Wireless Headphones", price: 49.99, category: "electronics", img: "https://placehold.co/260x260?text=Headphones", desc: "Bluetooth over-ear headphones with noise isolation."},
         {name: "Smartwatch Series X", price: 129.99, category: "electronics", img: "https://placehold.co/260x260?text=Smartwatch", desc: "Fitness tracking, notifications, and heart rate monitor."},
         {name: "4K Smart TV 55\"", price: 399.99, category: "electronics", img: "https://placehold.co/260x260?text=4K+TV", desc: "Ultra HD smart TV with streaming apps built-in."},
-
-        // CLOTHING
         {name: "Red Hoodie", price: 29.99, category: "clothing", img: "https://placehold.co/260x260?text=Hoodie", desc: "Soft fleece hoodie, perfect for everyday wear."},
         {name: "Graphic T-Shirt", price: 14.99, category: "clothing", img: "https://placehold.co/260x260?text=T-Shirt", desc: "Cotton tee with bold front print."},
-
-        // HOME
         {name: "Memory Foam Pillow", price: 19.99, category: "home", img: "https://placehold.co/260x260?text=Pillow", desc: "Comfortable pillow for better sleep."},
-
-        // TOYS
         {name: "Remote Control Car", price: 34.99, category: "toys", img: "https://placehold.co/260x260?text=RC+Car", desc: "Fast RC car with rechargeable battery."},
-
-        // SPORTS
         {name: "Soccer Ball Pro", price: 24.99, category: "sports", img: "https://placehold.co/260x260?text=Soccer+Ball", desc: "Match-quality soccer ball for training."},
-
-        // BEAUTY
         {name: "Face Cleanser", price: 9.99, category: "beauty", img: "https://placehold.co/260x260?text=Cleanser", desc: "Gentle cleanser for daily use."},
-
-        // GROCERY
         {name: "Cereal Family Pack", price: 4.99, category: "grocery", img: "https://placehold.co/260x260?text=Cereal", desc: "Crunchy cereal for breakfast."},
-
-        // BABY
         {name: "Baby Diapers Pack", price: 19.99, category: "baby", img: "https://placehold.co/260x260?text=Diapers", desc: "Soft and absorbent diapers."},
-
-        // PETS
         {name: "Dog Food Bag", price: 29.99, category: "pets", img: "https://placehold.co/260x260?text=Dog+Food", desc: "Balanced nutrition for adult dogs."}
     ];
 
-    // Expand to mega store
     const products = [];
-    const repeats = 50; // 50 × base products ≈ 2500 items
+    const repeats = 50;
     for (let i = 0; i < repeats; i++) {
         baseProducts.forEach((p) => {
             products.push({
